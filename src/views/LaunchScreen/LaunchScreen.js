@@ -1,13 +1,13 @@
 import React from 'react'
 import { ScrollView, Image, View } from 'react-native'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator } from 'react-navigation'
 import PropTypes from 'prop-types'
 
 import { Images } from '../../themes'
 import { RoundedButton } from '../../components'
 
 // TMP
-import DevscreensButton from '../../../ignite/DevScreens/DevscreensButton'
+import PresentationScreen from '../../../ignite/DevScreens/PresentationScreen'
 
 // Styles
 import styles from './LaunchScreenStyles'
@@ -19,6 +19,10 @@ import SignIn from '../SignIn/SignIn'
 const LaunchScreen = ({ navigation }) => {
   const openRegister = () => {
     navigation.navigate('Register')
+  }
+
+  const openPresentation = () => {
+    navigation.navigate('PresentationScreen')
   }
 
   return (
@@ -35,25 +39,26 @@ const LaunchScreen = ({ navigation }) => {
 
         <View style={styles.section}>
           <RoundedButton onPress={openRegister}>Sign Up</RoundedButton>
-          <DevscreensButton />
+          <RoundedButton onPress={openPresentation}>
+            Open Devscreens
+          </RoundedButton>
         </View>
       </ScrollView>
     </View>
   )
 }
 
-export default createAppContainer(
-  createStackNavigator(
-    {
-      LaunchScreen: { screen: LaunchScreen },
-      Register: { screen: Register },
-      SignIn: { screen: SignIn },
-    },
-    {
-      initialRouteName: 'LaunchScreen',
-      headerMode: 'none',
-    },
-  ),
+export default createStackNavigator(
+  {
+    LaunchScreen: { screen: LaunchScreen },
+    Register: { screen: Register },
+    SignIn: { screen: SignIn },
+    PresentationScreen: { screen: PresentationScreen },
+  },
+  {
+    initialRouteName: 'LaunchScreen',
+    headerMode: 'none',
+  },
 )
 
 LaunchScreen.propTypes = {
