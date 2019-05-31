@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, StatusBar } from 'react-native'
 import PropTypes from 'prop-types'
-import PrimaryNav from '../../navigation/AppNavigation'
 import { connect } from 'react-redux'
+import PrimaryNav from '../../navigation/AppNavigation'
 import StartupActions from '../../redux/StartupRedux'
 import ReduxPersist from '../../config/ReduxPersist'
 
@@ -10,14 +10,11 @@ import ReduxPersist from '../../config/ReduxPersist'
 import styles from './RootContainerStyles'
 
 class RootContainer extends Component {
-  static propTypes = {
-    startup: PropTypes.func,
-  }
-
   componentDidMount() {
     // if redux persist is not active fire startup action
     if (!ReduxPersist.active) {
-      this.props.startup()
+      const { startup } = this.props
+      startup()
     }
   }
 
@@ -40,3 +37,7 @@ export default connect(
   null,
   mapDispatchToProps,
 )(RootContainer)
+
+RootContainer.propTypes = {
+  startup: PropTypes.func.isRequired,
+}

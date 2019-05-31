@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unresolved */
+/* eslint-disable global-require */
 // leave off @2x/@3x
 const images = {
   api: require('../images/icons/icon-api-testing.png'),

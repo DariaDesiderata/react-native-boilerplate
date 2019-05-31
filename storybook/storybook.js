@@ -3,6 +3,7 @@ import { getStorybookUI, configure } from '@storybook/react-native'
 
 // import stories
 configure(() => {
+  // eslint-disable-next-line global-require
   require('../src/components/Stories')
 }, module)
 

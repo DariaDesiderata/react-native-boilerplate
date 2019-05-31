@@ -8,58 +8,60 @@ import PropTypes from 'prop-types'
 import { Images } from './DevTheme'
 
 // Examples Render Engine
-import ExamplesRegistry from '../../src/services/examplesRegistry'
-import '../Examples/Components/animatableExample.js'
-import '../Examples/Components/vectorExample.js'
+import { renderPluginExamples } from '../../src/services/examplesRegistry'
+import '../Examples/Components/animatableExample'
+import '../Examples/Components/vectorExample'
 
 // Styles
 import styles from './styles/PluginExamplesScreenStyles'
 
-class PluginExamplesScreen extends React.Component {
-  static propTypes = {
-    navigation: PropTypes.object,
-  }
+const PluginExamplesScreen = ({ navigation }) => {
+  return (
+    <View style={styles.mainContainer}>
+      <Image
+        source={Images.background}
+        style={styles.backgroundImage}
+        resizeMode="stretch"
+      />
+      <TouchableOpacity
+        onPress={() => navigation.goBack(null)}
+        style={{
+          position: 'absolute',
+          paddingTop: 30,
+          paddingHorizontal: 5,
+          zIndex: 10,
+        }}
+      >
+        <Image source={Images.backButton} />
+      </TouchableOpacity>
+      <ScrollView style={styles.container}>
+        <View style={{ alignItems: 'center', paddingTop: 60 }}>
+          <Image source={Images.usageExamples} style={styles.logo} />
+          <Text style={styles.titleText}>Plugin Examples</Text>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionText}>
+            {`The Plugin Examples screen is a playground for 3rd party libs and
+            logic proofs. Items on this screen can be composed of multiple
+            components working in concert. Functionality demos of libs and
+            practices`}
+          </Text>
+        </View>
 
-  render() {
-    return (
-      <View style={styles.mainContainer}>
-        <Image
-          source={Images.background}
-          style={styles.backgroundImage}
-          resizeMode="stretch"
-        />
-        <TouchableOpacity
-          onPress={() => this.props.navigation.goBack(null)}
-          style={{
-            position: 'absolute',
-            paddingTop: 30,
-            paddingHorizontal: 5,
-            zIndex: 10,
-          }}
-        >
-          <Image source={Images.backButton} />
-        </TouchableOpacity>
-        <ScrollView style={styles.container}>
-          <View style={{ alignItems: 'center', paddingTop: 60 }}>
-            <Image source={Images.usageExamples} style={styles.logo} />
-            <Text style={styles.titleText}>Plugin Examples</Text>
-          </View>
-          <View style={styles.section}>
-            <Text style={styles.sectionText}>
-              The Plugin Examples screen is a playground for 3rd party libs and
-              logic proofs. Items on this screen can be composed of multiple
-              components working in concert. Functionality demos of libs and
-              practices
-            </Text>
-          </View>
+        {renderPluginExamples()}
 
-          {ExamplesRegistry.renderPluginExamples()}
+        <View style={styles.screenButtons} />
+      </ScrollView>
+    </View>
+  )
+}
 
-          <View style={styles.screenButtons} />
-        </ScrollView>
-      </View>
-    )
-  }
+PluginExamplesScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+}
+
+PluginExamplesScreen.defaultProps = {
+  navigation: {},
 }
 
 export default createStackNavigator(

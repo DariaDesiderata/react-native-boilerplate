@@ -39,10 +39,6 @@ const APP_DATA = [
 ]
 
 export default class DeviceInfoScreen extends React.Component {
-  static propTypes = {
-    navigation: PropTypes.object,
-  }
-
   constructor(props) {
     super(props)
 
@@ -85,24 +81,25 @@ export default class DeviceInfoScreen extends React.Component {
   }
 
   updateConnectionInfoHistory = connectionInfo => {
-    const connectionInfoHistory = this.state.connectionInfoHistory.slice()
+    const [...connectionInfoHistory] = this.state
     connectionInfoHistory.push(connectionInfo)
     this.setState({ connectionInfoHistory })
   }
 
   netInfo() {
+    const { isConnected, connectionInfo, connectionInfoHistory } = this.state
     return [
       {
         title: 'Connection',
-        info: this.state.isConnected ? 'Online' : 'Offline',
+        info: isConnected ? 'Online' : 'Offline',
       },
       {
         title: 'Connection Info',
-        info: JSON.stringify(this.state.connectionInfo),
+        info: JSON.stringify(connectionInfo),
       },
       {
         title: 'Connection Info History',
-        info: JSON.stringify(this.state.connectionInfoHistory),
+        info: JSON.stringify(connectionInfoHistory),
       },
     ]
   }
@@ -113,13 +110,12 @@ export default class DeviceInfoScreen extends React.Component {
         <View style={styles.sectionHeaderContainer}>
           <Text style={styles.sectionHeader}>{cardTitle.toUpperCase()}</Text>
         </View>
-
         {this.renderRows(rowData)}
       </View>
     )
   }
 
-  renderRows(rowData) {
+  renderRows = rowData => {
     return rowData.map(cell => {
       const { title, info } = cell
       return (
@@ -136,6 +132,9 @@ export default class DeviceInfoScreen extends React.Component {
   }
 
   render() {
+    const {
+      navigation: { goBack },
+    } = this.props
     return (
       <View style={styles.mainContainer}>
         <Image
@@ -144,7 +143,7 @@ export default class DeviceInfoScreen extends React.Component {
           resizeMode="stretch"
         />
         <TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}
+          onPress={() => goBack()}
           style={{
             position: 'absolute',
             paddingTop: 30,
@@ -175,4 +174,12 @@ export default class DeviceInfoScreen extends React.Component {
       </View>
     )
   }
+}
+
+DeviceInfoScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+}
+
+DeviceInfoScreen.defaultProps = {
+  navigation: {},
 }

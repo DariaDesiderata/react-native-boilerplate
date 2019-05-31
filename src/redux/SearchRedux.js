@@ -131,6 +131,7 @@ export const performSearch = (state, { searchTerm }) => {
   return state.merge({ searching: true, searchTerm, results })
 }
 
+// eslint-disable-next-line no-unused-vars
 export const cancelSearch = state => INITIAL_STATE
 
 /* ------------- Hookup Reducers To Types ------------- */

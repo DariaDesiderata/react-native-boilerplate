@@ -2,11 +2,11 @@
 
 import React from 'react'
 import { View } from 'react-native'
-import ExamplesRegistry from '../../../src/services/examplesRegistry'
 import Icon from 'react-native-vector-icons/FontAwesome'
+import { addPluginExample } from '../../../src/services/examplesRegistry'
 
 // Example
-ExamplesRegistry.addPluginExample('Vector Icons', () => (
+addPluginExample('Vector Icons', () => (
   <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
     <Icon name="rocket" size={40} color="white" />
     <Icon name="send" size={40} color="white" />

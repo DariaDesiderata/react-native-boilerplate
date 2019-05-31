@@ -7,7 +7,8 @@
     "sourceType": "module",
     "impliedStrict": true,
     "ecmaFeatures": {
-      "jsx": true
+      "jsx": true,
+      "arrowFunctions": true
     }
   },
   "env": {
@@ -27,5 +28,10 @@
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/mouse-events-have-key-events": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off"
+  },
+  "globals": {
+    "__CLIENT__": true,
+    "__SERVER__": true,
+    "__DEV__": true
   }
 }

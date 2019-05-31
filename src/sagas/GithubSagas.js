@@ -2,6 +2,8 @@ import { call, put } from 'redux-saga/effects'
 import { path } from 'ramda'
 import GithubActions from '../redux/GithubRedux'
 
+// we may add additional sagas so don't export default this one
+// eslint-disable-next-line import/prefer-default-export
 export function* getUserAvatar(api, action) {
   const { username } = action
   // make the call to the api

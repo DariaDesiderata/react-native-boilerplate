@@ -2,11 +2,34 @@
 
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import ExamplesRegistry from '../../../src/services/examplesRegistry'
 import * as Animatable from 'react-native-animatable'
+import { addPluginExample } from '../../../src/services/examplesRegistry'
 
+const styles = StyleSheet.create({
+  button: {
+    margin: 10,
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  fadeInButton: {
+    backgroundColor: '#ff3b3a',
+  },
+  fadeInButtonText: {
+    color: 'white',
+  },
+  jelloButton: {
+    backgroundColor: 'white',
+  },
+  pulseButton: {
+    backgroundColor: '#ffc700',
+  },
+  pulseButtonText: {
+    color: 'white',
+  },
+})
 // Example
-ExamplesRegistry.addPluginExample('Animatable', () => (
+addPluginExample('Animatable', () => (
   <View>
     <Animatable.View
       animation="fadeIn"
@@ -32,27 +55,3 @@ ExamplesRegistry.addPluginExample('Animatable', () => (
     </Animatable.View>
   </View>
 ))
-
-const styles = StyleSheet.create({
-  button: {
-    margin: 10,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  fadeInButton: {
-    backgroundColor: '#ff3b3a',
-  },
-  fadeInButtonText: {
-    color: 'white',
-  },
-  jelloButton: {
-    backgroundColor: 'white',
-  },
-  pulseButton: {
-    backgroundColor: '#ffc700',
-  },
-  pulseButtonText: {
-    color: 'white',
-  },
-})

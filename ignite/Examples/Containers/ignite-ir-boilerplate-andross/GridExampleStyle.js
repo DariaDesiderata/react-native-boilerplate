@@ -3,7 +3,7 @@ import {
   ApplicationStyles,
   Metrics,
   Colors,
-} from '../../../../../DevScreens/DevTheme/'
+} from '../../../DevScreens/DevTheme'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,

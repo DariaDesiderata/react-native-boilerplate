@@ -6,18 +6,18 @@ import { connect } from 'react-redux'
 // import AlertMessage from '../components/AlertMessage'
 
 // Styles
-import styles from './Styles/GridExampleStyle'
+import styles from './GridExampleStyle'
 
 class GridExample extends Component {
   constructor(props) {
     super(props)
     // If you need scroll to bottom, consider http://bit.ly/2bMQ2BZ
 
-    /************************************************************
+    /** **********************************************************
      * STEP 1
      * This is an array of objects with the properties you desire
      * Usually this should come from Redux mapStateToProps
-     *************************************************************/
+     ************************************************************ */
     const dataObjects = [
       { title: 'First Title', description: 'First Description' },
       { title: 'Second Title', description: 'Second Description' },
@@ -28,12 +28,12 @@ class GridExample extends Component {
       { title: 'Seventh Title', description: 'Seventh Description' },
     ]
 
-    /************************************************************
+    /** **********************************************************
      * STEP 2
      * Teach datasource how to detect if rows are different
      * Make this function fast!  Perhaps something like:
      *   (r1, r2) => r1.id !== r2.id}
-     *************************************************************/
+     ************************************************************ */
     const rowHasChanged = (r1, r2) => r1 !== r2
 
     // DataSource configured
@@ -45,6 +45,11 @@ class GridExample extends Component {
     }
   }
 
+  // Render a footer.
+  _renderFooter = () => {
+    return <Text> - Footer - </Text>
+  }
+
   /* ***********************************************************
   * STEP 3
   * `_renderRow` function -How each cell/row should be rendered
@@ -52,8 +57,8 @@ class GridExample extends Component {
   *
   * e.g.
     return <MyCustomCell title={rowData.title} description={rowData.description} />
-  *************************************************************/
-  _renderRow(rowData) {
+  ************************************************************ */
+  _renderRow = rowData => {
     return (
       <View style={styles.row}>
         <Text style={styles.boldLabel}>{rowData.title}</Text>
@@ -78,25 +83,22 @@ class GridExample extends Component {
         }))
       }
     }
-  *************************************************************/
+  ************************************************************ */
 
   // Used for friendly AlertMessage
   // returns true if the dataSource is empty
   _noRowData() {
-    return this.state.dataSource.getRowCount() === 0
-  }
-
-  // Render a footer.
-  _renderFooter = () => {
-    return <Text> - Footer - </Text>
+    const { dataSource } = this.state
+    return dataSource.getRowCount() === 0
   }
 
   render() {
+    const { dataSource } = this.state
     return (
       <View style={styles.container}>
         <ListView
           contentContainerStyle={styles.listContent}
-          dataSource={this.state.dataSource}
+          dataSource={dataSource}
           renderRow={this._renderRow}
           renderFooter={this._renderFooter}
           enableEmptySections
@@ -107,12 +109,14 @@ class GridExample extends Component {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 const mapStateToProps = state => {
   return {
     // ...redux state to props here
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 const mapDispatchToProps = dispatch => {
   return {}
 }

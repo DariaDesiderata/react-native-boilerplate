@@ -1,6 +1,5 @@
 import '../config'
-import DebugConfig from '../config/DebugConfig'
-import React, { Component } from 'react'
+import React from 'react'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer/RootContainer'
 import createStore from '../redux'
@@ -17,14 +16,12 @@ const store = createStore()
  *
  * We separate like this to play nice with React Native's hot reloading.
  */
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <RootContainer />
-      </Provider>
-    )
-  }
+const App = () => {
+  return (
+    <Provider store={store}>
+      <RootContainer />
+    </Provider>
+  )
 }
 
 export default App

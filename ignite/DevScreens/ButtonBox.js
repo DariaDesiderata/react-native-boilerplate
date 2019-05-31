@@ -3,27 +3,30 @@ import { TouchableOpacity, Text, Image } from 'react-native'
 import PropTypes from 'prop-types'
 import styles from './styles/ButtonBoxStyles'
 
-export default class ButtonBox extends React.Component {
-  static propTypes = {
-    onPress: PropTypes.func,
-    image: PropTypes.number,
-    style: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
-    text: PropTypes.string,
-  }
-
-  render() {
-    return (
-      <TouchableOpacity
-        style={[styles.container, this.props.style]}
-        onPress={this.props.onPress}
-      >
-        <Image
-          resizeMode="contain"
-          source={this.props.image}
-          style={styles.image}
-        />
-        <Text style={styles.label}>{this.props.text}</Text>
-      </TouchableOpacity>
-    )
-  }
+const ButtonBox = ({ style, onPress, image, text }) => {
+  return (
+    <TouchableOpacity
+      style={[styles.container, style]}
+      onPress={() => onPress()}
+    >
+      <Image resizeMode="contain" source={image} style={styles.image} />
+      <Text style={styles.label}>{text}</Text>
+    </TouchableOpacity>
+  )
 }
+
+ButtonBox.propTypes = {
+  onPress: PropTypes.func,
+  image: PropTypes.number,
+  style: PropTypes.oneOfType([PropTypes.object, PropTypes.number]),
+  text: PropTypes.string,
+}
+
+ButtonBox.defaultProps = {
+  onPress: () => {},
+  image: 0,
+  style: 0,
+  text: '',
+}
+
+export default ButtonBox

@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { Fonts, Colors, Metrics } from '../../../themes/'
+import { Fonts, Colors, Metrics } from '../../../themes'
 
 export default StyleSheet.create({
   roundedButton__button: {

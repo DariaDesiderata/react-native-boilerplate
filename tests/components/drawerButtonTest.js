@@ -1,8 +1,8 @@
 import 'react-native'
 import React from 'react'
-import { DrawerButton } from '../../src/components'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
+import { DrawerButton } from '../../src/components'
 
 test('DrawerButton component renders correctly', () => {
   const tree = renderer
@@ -12,8 +12,8 @@ test('DrawerButton component renders correctly', () => {
 })
 
 test('onPress', () => {
-  let i = 0
-  const onPress = () => i++
+  const i = 0
+  const onPress = () => i + 1
   const wrapperPress = shallow(<DrawerButton onPress={onPress} text="hi" />)
 
   expect(wrapperPress.prop('onPress')).toBe(onPress) // uses the right handler
