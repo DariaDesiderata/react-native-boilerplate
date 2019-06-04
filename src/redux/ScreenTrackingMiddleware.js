@@ -26,9 +26,11 @@ const screenTracking = ({ getState }) => next => action => {
   const nextScreen = getCurrentRouteName(getState().nav)
   if (nextScreen !== currentScreen) {
     try {
+      // eslint-disable-next-line no-console
       console.info(`NAVIGATING ${currentScreen} to ${nextScreen}`)
       // Example: Analytics.trackEvent('user_navigation', {currentScreen, nextScreen})
     } catch (e) {
+      // eslint-disable-next-line no-console
       console.error(e)
     }
   }

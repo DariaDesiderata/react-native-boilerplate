@@ -1,7 +1,7 @@
 import 'react-native'
 import React from 'react'
-import { AlertMessage } from '../../src/components'
 import renderer from 'react-test-renderer'
+import { AlertMessage } from '../../src/components'
 
 test('AlertMessage component renders correctly if show is true', () => {
   const tree = renderer.create(<AlertMessage title="howdy" />).toJSON()

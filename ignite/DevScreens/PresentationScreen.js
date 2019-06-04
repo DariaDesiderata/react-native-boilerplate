@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
+import { createStackNavigator, createAppContainer } from 'react-navigation'
 import PropTypes from 'prop-types'
 import { Images } from './DevTheme'
 import ButtonBox from './ButtonBox'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
 // Screens
 import APITestingScreen from './APITestingScreen'
 import ComponentExamplesScreen from './ComponentExamplesScreen'
@@ -15,37 +15,42 @@ import FaqScreen from './FaqScreen'
 // Styles
 import styles from './styles/PresentationScreenStyles'
 
-class PresentationScreen extends React.Component {
-  static propTypes = {
-    navigation: PropTypes.object,
-    screenProps: PropTypes.object,
+class PresentationScreen extends Component {
+  navigateTo(screenName) {
+    const {
+      navigation: { navigate },
+    } = this.props
+    navigate(screenName)
   }
 
-  openComponents = () => {
-    this.props.navigation.navigate('ComponentExamplesScreen')
+  openComponents() {
+    this.navigateTo('ComponentExamplesScreen')
   }
 
-  openUsage = () => {
-    this.props.navigation.navigate('PluginExamplesScreen')
+  openUsage() {
+    this.navigateTo('PluginExamplesScreen')
   }
 
-  openApi = () => {
-    this.props.navigation.navigate('APITestingScreen')
+  openApi() {
+    this.navigateTo('APITestingScreen')
   }
 
-  openTheme = () => {
-    this.props.navigation.navigate('ThemeScreen')
+  openTheme() {
+    this.navigateTo('ThemeScreen')
   }
 
-  openDevice = () => {
-    this.props.navigation.navigate('DeviceInfoScreen')
+  openDevice() {
+    this.navigateTo('DeviceInfoScreen')
   }
 
-  openFaq = () => {
-    this.props.navigation.navigate('FaqScreen')
+  openFaq() {
+    this.navigateTo('FaqScreen')
   }
 
   render() {
+    const {
+      screenProps: { toggle },
+    } = this.props
     return (
       <View style={styles.mainContainer}>
         <Image
@@ -53,8 +58,9 @@ class PresentationScreen extends React.Component {
           style={styles.backgroundImage}
           resizeMode="stretch"
         />
+
         <TouchableOpacity
-          onPress={this.props.screenProps.toggle}
+          onPress={toggle}
           style={{
             position: 'absolute',
             paddingTop: 30,
@@ -79,13 +85,13 @@ class PresentationScreen extends React.Component {
           </Text>
           <View style={styles.buttonsContainer}>
             <ButtonBox
-              onPress={this.openComponents}
+              onPress={() => this.openComponents()}
               style={styles.componentButton}
               image={Images.components}
               text="Components"
             />
             <ButtonBox
-              onPress={this.openUsage}
+              onPress={() => this.openUsage()}
               style={styles.usageButton}
               image={Images.usageExamples}
               text="Plugin Examples"
@@ -93,38 +99,46 @@ class PresentationScreen extends React.Component {
           </View>
           <View style={styles.buttonsContainer}>
             <ButtonBox
-              onPress={this.openApi}
+              onPress={() => this.openApi()}
               style={styles.apiButton}
               image={Images.api}
               text="API Testing"
             />
             <ButtonBox
-              onPress={this.openTheme}
+              onPress={() => this.openTheme()}
               image={Images.theme}
               text="Theme"
             />
           </View>
           <View style={styles.buttonsContainer}>
             <ButtonBox
-              onPress={this.openDevice}
+              onPress={() => this.openDevice()}
               style={styles.deviceButton}
               image={Images.deviceInfo}
               text="Device Info"
             />
             <ButtonBox
-              onPress={this.openFaq}
+              onPress={() => this.openFaq()}
               style={styles.usageButton}
               image={Images.faq}
               text="FAQ"
             />
           </View>
         </ScrollView>
-        <View style={styles.banner}>
-          <Text style={styles.bannerLabel}>Made with ❤️ by Infinite Red</Text>
-        </View>
+        <View style={styles.banner} />
       </View>
     )
   }
+}
+
+PresentationScreen.propTypes = {
+  navigation: PropTypes.shape({}),
+  screenProps: PropTypes.shape({}),
+}
+
+PresentationScreen.defaultProps = {
+  navigation: {},
+  screenProps: {},
 }
 
 export default createAppContainer(
@@ -149,6 +163,7 @@ export default createAppContainer(
       navigationOptions: {
         header: {
           left: (
+            // eslint-disable-next-line no-alert
             <TouchableOpacity onPress={() => window.alert('pop')}>
               <Image
                 source={Images.closeButton}

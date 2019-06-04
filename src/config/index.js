@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Text } from 'react-native'
 import DebugConfig from './DebugConfig'
 import AppConfig from './AppConfig'

@@ -1,12 +1,13 @@
 import React from 'react'
 import { ScrollView, View, Text, TouchableOpacity, Image } from 'react-native'
 import PropTypes from 'prop-types'
-import { Metrics, Images } from './DevTheme'
+import FJSON from 'format-json'
+import { Images } from './DevTheme'
 import { FullButton } from '../../src/components/Buttons'
 
 // For API
 import API from '../../src/services/api'
-import FJSON from 'format-json'
+import APIResult from './APIResult'
 
 // Styles
 import styles from './styles/APITestingScreenStyles'
@@ -19,31 +20,28 @@ const endpoints = [
   { label: 'Search User (skellock)', endpoint: 'getUser', args: ['skellock'] },
 ]
 
-export default class APITestingScreen extends React.Component {
-  static propTypes = {
-    navigation: PropTypes.object,
-  }
-
+class APITestingScreen extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      visibleHeight: Metrics.screenHeight,
+      // visibleHeight: Metrics.screenHeight, // import { Metrics } from './DevTheme'
     }
-
+    this.containerRef = React.createRef()
+    this.resultRef = React.createRef()
     this.api = API.create()
   }
 
   showResult(response, title = 'Response') {
-    this.refs.container.scrollTo({ x: 0, y: 0, animated: true })
+    this.containerRef.current.scrollTo({ x: 0, y: 0, animated: true })
     if (response.ok) {
-      this.refs.result.setState({
+      this.resultRef.current.setState({
         message: FJSON.plain(response.data),
-        title: title,
+        title,
       })
     } else {
-      this.refs.result.setState({
+      this.resultRef.setState({
         message: `${response.problem} - ${response.status}`,
-        title: title,
+        title,
       })
     }
   }
@@ -72,6 +70,9 @@ export default class APITestingScreen extends React.Component {
   }
 
   render() {
+    const {
+      navigation: { goBack },
+    } = this.props
     return (
       <View style={styles.mainContainer}>
         <Image
@@ -80,7 +81,7 @@ export default class APITestingScreen extends React.Component {
           resizeMode="stretch"
         />
         <TouchableOpacity
-          onPress={() => this.props.navigation.goBack()}
+          onPress={() => goBack()}
           style={{
             position: 'absolute',
             paddingTop: 30,
@@ -90,7 +91,7 @@ export default class APITestingScreen extends React.Component {
         >
           <Image source={Images.backButton} />
         </TouchableOpacity>
-        <ScrollView style={styles.container} ref="container">
+        <ScrollView style={styles.container} ref={this.containerRef}>
           <View style={{ alignItems: 'center', paddingTop: 60 }}>
             <Image source={Images.api} style={styles.logo} />
             <Text style={styles.titleText}>API</Text>
@@ -107,54 +108,19 @@ export default class APITestingScreen extends React.Component {
             </Text>
           </View>
           {this.renderButtons()}
-          <APIResult ref="result" />
+          <APIResult ref={this.resultRef} />
         </ScrollView>
       </View>
     )
   }
 }
 
-class APIResult extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: false,
-      title: false,
-    }
-  }
-
-  onApiPress() {
-    this.setState({ message: false })
-  }
-
-  renderView() {
-    return (
-      <ScrollView
-        style={{ top: 0, bottom: 0, left: 0, right: 0, position: 'absolute' }}
-        overflow="hidden"
-      >
-        <TouchableOpacity
-          style={{ backgroundColor: 'white', padding: 20 }}
-          onPress={() => this.onApiPress()}
-        >
-          <Text>{this.state.title} Response:</Text>
-          <Text
-            allowFontScaling={false}
-            style={{ fontFamily: 'CourierNewPS-BoldMT', fontSize: 10 }}
-          >
-            {this.state.message}
-          </Text>
-        </TouchableOpacity>
-      </ScrollView>
-    )
-  }
-
-  render() {
-    let messageView = null
-    if (this.state.message) {
-      return this.renderView()
-    }
-
-    return messageView
-  }
+APITestingScreen.propTypes = {
+  navigation: PropTypes.shape({}),
 }
+
+APITestingScreen.defaultProps = {
+  navigation: {},
+}
+
+export default APITestingScreen

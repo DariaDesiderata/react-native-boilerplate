@@ -1,8 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import Rehydration from '../services/rehydration'
 import ReduxPersist from '../config/ReduxPersist'
-import DebugConfig from '../config/DebugConfig'
-import createSagaMiddleware from 'redux-saga'
 import ScreenTracking from './ScreenTrackingMiddleware'
 
 // creates the store
@@ -31,7 +30,7 @@ export default (rootReducer, rootSaga) => {
   }
 
   // kick off root saga
-  let sagasManager = sagaMiddleware.run(rootSaga)
+  const sagasManager = sagaMiddleware.run(rootSaga)
 
   return {
     store,

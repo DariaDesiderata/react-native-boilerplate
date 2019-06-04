@@ -1,19 +1,35 @@
-// leave off @2x/@3x
+/* eslint-disable import/no-unresolved */ // leave off @2x/@3x
+
+import IgniteLogo from '../images/ignite-logo-transparent.png'
+import ApiImg from '../images/icons/icon-api-testing.png'
+import TileBkg from '../images/tile_bg.png'
+import Background from '../images/BG.png'
+import Components from '../images/icons/icon-components.png'
+import DeviceInfo from '../images/icons/icon-device-information.png'
+import Faq from '../images/icons/faq-icon.png'
+import Home from '../images/icons/icon-home.png'
+import Theme from '../images/icons/icon-theme.png'
+import UsageExamples from '../images/icons/icon-usage-examples.png'
+import ChevronRight from '../images/icons/chevron-right.png'
+import Hamburger from '../images/icons/hamburger.png'
+import BackButton from '../images/icons/back-button.png'
+import CloseButton from '../images/icons/close-button.png'
+
 const images = {
-  igniteClear: require('../images/ignite-logo-transparent.png'),
-  tileBg: require('../images/tile_bg.png'),
-  background: require('../images/BG.png'),
-  api: require('../images/icons/icon-api-testing.png'),
-  components: require('../images/icons/icon-components.png'),
-  deviceInfo: require('../images/icons/icon-device-information.png'),
-  faq: require('../images/icons/faq-icon.png'),
-  home: require('../images/icons/icon-home.png'),
-  theme: require('../images/icons/icon-theme.png'),
-  usageExamples: require('../images/icons/icon-usage-examples.png'),
-  chevronRight: require('../images/icons/chevron-right.png'),
-  hamburger: require('../images/icons/hamburger.png'),
-  backButton: require('../images/icons/back-button.png'),
-  closeButton: require('../images/icons/close-button.png'),
+  igniteClear: IgniteLogo,
+  tileBg: TileBkg,
+  background: Background,
+  api: ApiImg,
+  components: Components,
+  deviceInfo: DeviceInfo,
+  faq: Faq,
+  home: Home,
+  theme: Theme,
+  usageExamples: UsageExamples,
+  chevronRight: ChevronRight,
+  hamburger: Hamburger,
+  backButton: BackButton,
+  closeButton: CloseButton,
 }
 
 export default images
