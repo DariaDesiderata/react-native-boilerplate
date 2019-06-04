@@ -22,6 +22,8 @@ const ApplicationStyles = {
       left: 0,
       bottom: 0,
       right: 0,
+      width: Metrics.screenWidth,
+      height: Metrics.screenHeight,
     },
     container: {
       flex: 1,

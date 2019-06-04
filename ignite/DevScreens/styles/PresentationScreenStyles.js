@@ -3,6 +3,7 @@ import { Metrics, Colors, Fonts, ApplicationStyles } from '../DevTheme'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
+
   container: {
     marginBottom: 36,
     paddingTop: Metrics.section,
