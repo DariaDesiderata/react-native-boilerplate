@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ScrollView, Text, Image, View, TouchableOpacity } from 'react-native'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator, NavigationActions } from 'react-navigation'
 import PropTypes from 'prop-types'
 import { Images } from './DevTheme'
 import ButtonBox from './ButtonBox'
@@ -47,6 +47,11 @@ class PresentationScreen extends Component {
     this.navigateTo('FaqScreen')
   }
 
+  goBack = () => {
+    const backAction = NavigationActions.back()
+    this.props.navigation.dispatch(backAction)
+  }
+
   render() {
     const {
       screenProps: { toggle },
@@ -60,7 +65,7 @@ class PresentationScreen extends Component {
         />
 
         <TouchableOpacity
-          onPress={toggle}
+          onPress={() => this.goBack()}
           style={{
             position: 'absolute',
             paddingTop: 30,
@@ -141,41 +146,38 @@ PresentationScreen.defaultProps = {
   screenProps: {},
 }
 
-export default createAppContainer(
-  createStackNavigator(
-    {
-      PresentationScreen: { screen: PresentationScreen },
-      APITestingScreen: { screen: APITestingScreen },
-      ComponentExamplesScreen: { screen: ComponentExamplesScreen },
-      DeviceInfoScreen: { screen: DeviceInfoScreen },
-      PluginExamplesScreen: { screen: PluginExamplesScreen },
-      ThemeScreen: { screen: ThemeScreen },
-      FaqScreen: { screen: FaqScreen },
+export default createStackNavigator(
+  {
+    PresentationScreen: { screen: PresentationScreen },
+    APITestingScreen: { screen: APITestingScreen },
+    ComponentExamplesScreen: { screen: ComponentExamplesScreen },
+    DeviceInfoScreen: { screen: DeviceInfoScreen },
+    PluginExamplesScreen: { screen: PluginExamplesScreen },
+    ThemeScreen: { screen: ThemeScreen },
+    FaqScreen: { screen: FaqScreen },
+  },
+  {
+    cardStyle: {
+      opacity: 1,
+      backgroundColor: '#3e243f',
     },
-    {
-      cardStyle: {
-        opacity: 1,
-        backgroundColor: '#3e243f',
-      },
-      initialRouteName: 'PresentationScreen',
-      headerMode: 'none',
-      // Keeping this here for future when we can make
-      navigationOptions: {
-        header: {
-          left: (
-            // eslint-disable-next-line no-alert
-            <TouchableOpacity onPress={() => window.alert('pop')}>
-              <Image
-                source={Images.closeButton}
-                style={{ marginHorizontal: 10 }}
-              />
-            </TouchableOpacity>
-          ),
-          style: {
-            backgroundColor: '#3e243f',
-          },
+    initialRouteName: 'PresentationScreen',
+    headerMode: 'none',
+    // Keeping this here for future when we can make
+    navigationOptions: {
+      header: {
+        left: (
+          <TouchableOpacity onPress={() => window.alert('pop')}>
+            <Image
+              source={Images.closeButton}
+              style={{ marginHorizontal: 10 }}
+            />
+          </TouchableOpacity>
+        ),
+        style: {
+          backgroundColor: '#3e243f',
         },
       },
     },
-  ),
+  },
 )
