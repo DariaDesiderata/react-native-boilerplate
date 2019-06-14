@@ -57,7 +57,7 @@ devices by running `xcrun simctl list devices` from the console.
 
 ## :no_entry_sign: Airbnb Styleguide Compliant
 
-This project adheres to Airbnb Styleguide Compliant. Our CI enforces this, so we suggest you enable
+This project adheres to the Airbnb Styleguide. Our CI enforces this, so we suggest you enable
 linting and auto-formatting to keep your project compliant during development.
 
 ## :closed_lock_with_key: Secrets
