@@ -16,11 +16,12 @@ import FaqScreen from './FaqScreen'
 import styles from './styles/PresentationScreenStyles'
 
 class PresentationScreen extends Component {
-  navigateTo(screenName) {
+  goBack = () => {
+    const backAction = NavigationActions.back()
     const {
-      navigation: { navigate },
-    } = this.props
-    navigate(screenName)
+      navigation: { dispatch },
+    } = this.prop
+    dispatch(backAction)
   }
 
   openComponents() {
@@ -47,15 +48,17 @@ class PresentationScreen extends Component {
     this.navigateTo('FaqScreen')
   }
 
-  goBack = () => {
-    const backAction = NavigationActions.back()
-    this.props.navigation.dispatch(backAction)
+  navigateTo(screenName) {
+    const {
+      navigation: { navigate },
+    } = this.props
+    navigate(screenName)
   }
 
   render() {
-    const {
-      screenProps: { toggle },
-    } = this.props
+    // const {
+    //   screenProps: { toggle },
+    // } = this.props
     return (
       <View style={styles.mainContainer}>
         <Image
