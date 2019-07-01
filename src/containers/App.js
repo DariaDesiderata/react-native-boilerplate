@@ -5,7 +5,8 @@ import Config from 'react-native-config'
 import { Sentry } from 'react-native-sentry'
 import RootContainer from './RootContainer/RootContainer'
 import createStore from '../redux'
-import log from '../lib/utils'
+import { log } from '../lib/utils'
+
 // create our store
 const store = createStore()
 
@@ -24,10 +25,7 @@ const store = createStore()
 
 class App extends Component {
   componentWillMount() {
-    if (
-      Config.SENTRY_ENABLED === 'true' &&
-      Config.SENTRY_ENVIRONMENT === 'production'
-    ) {
+    if (Config.SENTRY_ENABLED === 'true') {
       Sentry.config(Config.SENTRY_INSTALL_URL).install()
       Sentry.setTagsContext({
         environment: Config.SENTRY_ENVIRONMENT,
